@@ -1,0 +1,19 @@
+{% extends "app/layout.html" %}
+
+{% block body %}
+    <h1>compras:</h1>
+    <ul>
+        {% for app in app %}
+            <!-- <li>app {{ app.id }}: R$ {{ app.preco}}</li> -->
+            <li><a href="{% url 'app' app.id %}">item {{ app.id }}</a>: {{ app.compra }} R$ {{ app.preco }} <br> -Lista {{ app.lista }} <p></p></li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for app in app %}
+        
+            <h4>Soma dos preços dos produtos na lista {{ app.lista }}</h4>
+            <p>Preço total: R$ {{ preco_total }}</p>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

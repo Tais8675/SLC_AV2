@@ -1,0 +1,13 @@
+{% extends "app/layout.html" %}
+
+{% block body %}
+    <h1>compras {{ app.id }}</h1>
+    <ul>
+        <li>compra: {{ app.compra }}</li>
+        <li>preco: {{ app.preco }} </li>
+        <li>Lista: {{ app.lista }} </li>
+        
+    </ul>
+    <a href="{% url 'index' %}">Pagina inicial</a>
+
+{% endblock %}
