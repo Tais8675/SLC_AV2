@@ -4,9 +4,15 @@
     <br>
     <ul>
         <button>
-            <a href="{% url 'inicio' %}">login/cadastro</a>
+            <a href="{% url 'inicio' %}">login/cadastro de usuario</a>
         </button>
         <br>
+        <button>
+            <a href="admin">cadastrar listas e produtos</a>
+        </button>
+
+        <br>
+
     <h1>compras:</h1>
         {% for app in app %}
             <!-- <li>app {{ app.id }}: R$ {{ app.preco}}</li> -->
