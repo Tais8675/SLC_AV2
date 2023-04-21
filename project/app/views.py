@@ -5,7 +5,8 @@ from .models import App, Lista
 
 # Create your views here.
 
-
+def inicio(request):
+    return render(request, 'loja/inicio.html')
 
 def index(request):
     return render(request, "app/index.html", {

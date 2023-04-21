@@ -1,8 +1,13 @@
 {% extends "app/layout.html" %}
 
 {% block body %}
-    <h1>compras:</h1>
+    <br>
     <ul>
+        <button>
+            <a href="{% url 'inicio' %}">login/cadastro</a>
+        </button>
+        <br>
+    <h1>compras:</h1>
         {% for app in app %}
             <!-- <li>app {{ app.id }}: R$ {{ app.preco}}</li> -->
             <li><a href="{% url 'app' app.id %}">item {{ app.id }}</a>: {{ app.compra }} R$ {{ app.preco }} <br> -Lista {{ app.lista }} <p></p></li>
