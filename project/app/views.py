@@ -2,7 +2,6 @@ from audioop import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import App, Lista
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
@@ -10,9 +9,6 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
-
-def inicio(request):
-    return render(request, 'app/inicio.html')
 
 def index(request):
     return render(request, "app/index.html", {
@@ -28,13 +24,6 @@ def app(request, app_id):
       
     })
 
-
-
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 
 
 

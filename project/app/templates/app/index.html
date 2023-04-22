@@ -1,18 +1,30 @@
 {% extends "app/layout.html" %}
 
 {% block body %}
-    <br>
+
+
+    
     <ul>
+        
         <button>
-            <a href="{% url 'inicio' %}">login/cadastro de usuario</a>
+            <a href="logar">login</a>
+            
         </button>
-        <br>
+        
+        <button>
+            <a href="cadastro">cadastro</a>
+        </button>
+        <h5>
+            Faça login ou cadastra-se para cadastrar listas e produtos!
+        </h5>
+        
+    
         <button>
             <a href="admin">cadastrar listas e produtos</a>
         </button>
 
         <br>
-
+        <img src="https://cdn-icons-png.flaticon.com/512/3594/3594363.png" alt=" "width="100px">
     <h1>compras:</h1>
         {% for app in app %}
             <!-- <li>app {{ app.id }}: R$ {{ app.preco}}</li> -->
@@ -27,4 +39,18 @@
         {% endfor %}
     </ul>
     
+    <style>
+        button {
+	                font-size: 14px;
+	                font-weight: bold;
+	                color: #fff;
+	                background-color: #4af3bb;
+	                border: none;
+	                padding: 5px 10px;
+	                border-radius: 5px;
+	                cursor: pointer;
+	                margin: 0 5px;
+	            }
+    </style>
+   
 {% endblock %}
