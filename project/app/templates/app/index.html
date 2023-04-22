@@ -35,7 +35,68 @@
 
     <ul>
 
-        
+      
+   </script>
+   {% csrf_token %}
+   <form id="formulario-produto">
+    <input type="text" name="nome" placeholder="Nome do produto">
+    <input type="number" step="any" name="valor" placeholder="Valor do produto">
+    <input type="text" name="lista" placeholder="lista do produto">
+    {% csrf_token %}
+    <button type="submit">Adicionar produto</button>
+</form>
+<script>
+    fetch('/adicionar-produto/', {
+    method: 'POST',
+    body: formData,
+    headers: {
+        'X-CSRFToken': getCookie('csrftoken') // função para pegar o valor do cookie do token CSRF
+    }
+})
+
+
+    // Adiciona um listener no formulário que envia uma requisição POST para a API
+    document.querySelector('#formulario-produto').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Extrai os dados do formulário
+        const formData = new FormData(event.target);
+        const nome = formData.get('nome');
+        const valor = formData.get('valor');
+
+        // Envia a requisição POST para a rota adicionar-produto/
+        fetch('/adicionar-produto/', {
+            method: 'POST',
+            body: formData
+        }).then(function(response) {
+            if (response.ok) {
+                // Se a requisição for bem-sucedida, atualiza a página
+                location.reload();
+            } else {
+                // Caso contrário, exibe uma mensagem de erro
+                alert('Ocorreu um erro ao adicionar o produto');
+            }
+        }).catch(function(error) {
+            // Em caso de erro, exibe uma mensagem de erro
+            alert('Ocorreu um erro ao adicionar o produto');
+        });
+    });
+
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>  
 
 	
 	{% if produtos %}
@@ -116,43 +177,6 @@ ul li:last-child {
 
   
 
-   </script>
-
-<form id="formulario-produto">
-    <input type="text" name="nome" placeholder="Nome do produto">
-    <input type="number" name="valor" placeholder="Valor do produto">
-    <input type="text" name="lista" placeholder="lista do produto">
-    <button type="submit">Adicionar produto</button>
-</form>
-
-<script>
-    // Adiciona um listener no formulário que envia uma requisição POST para a API
-    document.querySelector('#formulario-produto').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Extrai os dados do formulário
-        const formData = new FormData(event.target);
-        const nome = formData.get('nome');
-        const valor = formData.get('valor');
-
-        // Envia a requisição POST para a rota adicionar-produto/
-        fetch('/adicionar-produto/', {
-            method: 'POST',
-            body: formData
-        }).then(function(response) {
-            if (response.ok) {
-                // Se a requisição for bem-sucedida, atualiza a página
-                location.reload();
-            } else {
-                // Caso contrário, exibe uma mensagem de erro
-                alert('Ocorreu um erro ao adicionar o produto');
-            }
-        }).catch(function(error) {
-            // Em caso de erro, exibe uma mensagem de erro
-            alert('Ocorreu um erro ao adicionar o produto');
-        });
-    });
-</script>
 
 	
    

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -16,6 +16,7 @@ def adicionar_produto(request):
         # Extrai os dados do POST
         nome = request.POST.get('nome')
         valor = request.POST.get('valor')
+        print(nome, valor)  # Adicionado para depuração
 
         # Salva o produto no banco de dados
         produto = App(nome=nome, valor=valor)
@@ -26,7 +27,7 @@ def adicionar_produto(request):
     else:
         # Retorna uma resposta de erro caso o método HTTP não seja POST
         return JsonResponse({'status': 'error', 'message': 'Método não permitido'})
-###
+
 
 ##
 
