@@ -3,6 +3,7 @@
 {% block body %}
 
 
+
     
     <ul>
         
@@ -31,15 +32,73 @@
             <li><a href="{% url 'app' app.id %}">item {{ app.id }}</a>: {{ app.compra }} R$ {{ app.preco }} <br> -Lista {{ app.lista }} <p></p></li>
         {% endfor %}
     </ul>
+
     <ul>
+
+        
+
+	
+	{% if produtos %}
+		<h2>Produtos Adicionados:</h2>
+		<ul>
+			{% for produto in produtos %}
+				<li>{{ produto.produto }} - R$ {{ produto.valor }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+    </ul>
+    <ul>
+
+    
         {% for app in app %}
         
             <h4>Soma dos preços dos produtos na lista {{ app.lista }}</h4>
-            <p>Preço total: R$ {{ preco_total }}</p>
+            <p>Preço Total: R$ {{ app.lista.total }}</p>
         {% endfor %}
     </ul>
-    
+
+
+
+
+
     <style>
+        p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+
+        ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+
+
+
+
+
+ 
+
+
+        body {
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
         button {
 	                font-size: 14px;
 	                font-weight: bold;
@@ -52,15 +111,50 @@
 	                margin: 0 5px;
 	            }
 
+
    </style>
 
-   <style>
+  
 
-    img {
-    display: block;
-    margin: 20px auto;
-    width: 100px;
-}
-   </style>
+   </script>
+
+<form id="formulario-produto">
+    <input type="text" name="nome" placeholder="Nome do produto">
+    <input type="number" name="valor" placeholder="Valor do produto">
+    <input type="text" name="lista" placeholder="lista do produto">
+    <button type="submit">Adicionar produto</button>
+</form>
+
+<script>
+    // Adiciona um listener no formulário que envia uma requisição POST para a API
+    document.querySelector('#formulario-produto').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Extrai os dados do formulário
+        const formData = new FormData(event.target);
+        const nome = formData.get('nome');
+        const valor = formData.get('valor');
+
+        // Envia a requisição POST para a rota adicionar-produto/
+        fetch('/adicionar-produto/', {
+            method: 'POST',
+            body: formData
+        }).then(function(response) {
+            if (response.ok) {
+                // Se a requisição for bem-sucedida, atualiza a página
+                location.reload();
+            } else {
+                // Caso contrário, exibe uma mensagem de erro
+                alert('Ocorreu um erro ao adicionar o produto');
+            }
+        }).catch(function(error) {
+            // Em caso de erro, exibe uma mensagem de erro
+            alert('Ocorreu um erro ao adicionar o produto');
+        });
+    });
+</script>
+
+	
+   
    
 {% endblock %}

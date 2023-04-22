@@ -7,6 +7,11 @@ class Lista(models.Model):
     
     def __str__(self):
         return f"{self.nome}"
+    
+    def total(self):
+        return sum(item.preco for item in self.app_set.all())
+
+    total.short_description = "Total"
 
   
 

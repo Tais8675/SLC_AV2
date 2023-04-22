@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Criar novo objeto App</title>
+</head>
+<body>
+    <h1>Criar novo objeto App</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Criar">
+    </form>
+</body>
+</html>
+
